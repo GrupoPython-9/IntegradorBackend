@@ -21,8 +21,10 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String mail;
-    private int celular;
+    private String celular;
     private String contrasenia;
+
+    private boolean isEliminado = false;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;

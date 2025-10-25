@@ -18,12 +18,8 @@ public class UsuarioMapper {
                 .apellido(usuario.getApellido())
                 .mail(usuario.getMail())
                 .celular(usuario.getCelular())
-                .contrasenia(usuario.getContrasenia())
-                .pedidos_nombres (usuario.getPedidos()!= null
-                        ?  usuario.getPedidos().stream()
-                        .map(pedido -> "Pedido #" + pedido.getId()) // 👈 ejemplo: mostrar ID del pedido
-                        .collect(Collectors.toList())
-                        : null)
+
+
 
                 .build();
         return usuarioDto;

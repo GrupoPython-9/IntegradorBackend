@@ -1,0 +1,73 @@
+package com.example.foodstore.controller;
+
+import com.example.foodstore.Services.UsuarioService;
+import com.example.foodstore.entity.dtos.UsuarioCreate;
+import com.example.foodstore.entity.dtos.UsuarioEdit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@CrossOrigin
+@RequestMapping
+public class UsuarioController {
+    @Autowired
+    UsuarioService usuarioService;
+    @PostMapping
+     public ResponseEntity<?> crear (@RequestBody UsuarioCreate u){
+        try {
+            return ResponseEntity.ok().body(usuarioService.crear(u));
+
+        }catch (Exception e){
+
+            return ResponseEntity.badRequest().body("Ocurrio un error" + e.getMessage());
+
+        }
+    }
+
+
+    @PutMapping
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody UsuarioEdit usuarioEdit){
+      try {
+          return ResponseEntity.ok().body(usuarioService.actualizar(id,usuarioEdit));
+      } catch (Exception e) {
+          return ResponseEntity.badRequest().body("Ocurrio un error" + e.getMessage());
+      }
+
+    }
+
+
+    @DeleteMapping("/{id}")
+
+    public ResponseEntity<?>borrar(@PathVariable Long id){
+       try {
+           usuarioService.eliminar(id);
+           return ResponseEntity.ok().body("Entidad eliminada");
+       }catch (Exception e){
+           return ResponseEntity.badRequest().body("Ocurrio un error " +e.getMessage());
+       }
+
+
+
+    }
+
+    @GetMapping
+    public ResponseEntity<?> buscaTodos(){
+        try {
+            return ResponseEntity.ok().body(usuarioService.buscaTodos());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Ocurrio un error " +e.getMessage());
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscaId(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(usuarioService.buscaId(id));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Ocurrio un error " +e.getMessage());
+        }
+    }
+
+
+}

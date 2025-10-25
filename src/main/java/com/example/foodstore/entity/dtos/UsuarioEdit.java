@@ -11,11 +11,11 @@ import java.util.List;
 @Setter
 public class UsuarioEdit {
 
-    private String nombre;
-    private String apellido;
+    //private String nombre;
+    //private String apellido;
     private String mail;
-    private int celular;
+    private String celular;
     private String contrasenia;
 
-    private List<Long>id_pedidos;
+
 }
