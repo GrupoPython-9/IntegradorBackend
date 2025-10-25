@@ -24,13 +24,10 @@ public class Usuario {
     private String celular;
     private String contrasenia;
 
+    @Builder.Default
     private boolean isEliminado = false;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
-    @OneToMany
-    @JoinColumn
-    @Builder.Default
-    private List<Pedido> pedidos = new ArrayList<>();
 }

@@ -19,10 +19,11 @@ public class UsuarioServiceImp implements UsuarioService {
 
     @Override
     public UsuarioDto crear(UsuarioCreate u) {
+        if (usuarioRepository.existsByMail(u.getMail())) {
+            return null;
+        }
         Usuario usuario = UsuarioMapper.toEntity(u);
-
         usuario = usuarioRepository.save(usuario);
-
         UsuarioDto usuarioDto = UsuarioMapper.toDTo(usuario);
         return usuarioDto;
 
@@ -41,30 +42,20 @@ public class UsuarioServiceImp implements UsuarioService {
             usuario.setMail(u.getMail());
             usuario.setCelular(u.getCelular());
             usuario.setContrasenia(u.getContrasenia());
-
             usuario = usuarioRepository.save(usuario);
-
             return UsuarioMapper.toDTo(usuario);
-
         }
         return null;
-
-
     }
 
     @Override
-
     public UsuarioDto buscaId(Long id) {
         Optional<Usuario>usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isPresent()) {
             if (!usuarioOptional.get().isEliminado()) {
                 return UsuarioMapper.toDTo(usuarioOptional.get());
-
             }
-
         }return null;
-
-
     }
     
     @Override
@@ -81,15 +72,10 @@ public class UsuarioServiceImp implements UsuarioService {
             Usuario u =usuario.get();
             u.setEliminado(true);
             usuarioRepository.save(u);
-
         }
-
-
     }
 
-
-
-
+    //MEtodo para hashear
 }
 
 

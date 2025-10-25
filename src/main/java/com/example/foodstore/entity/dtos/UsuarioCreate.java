@@ -10,9 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 
-
 public class UsuarioCreate {
-
 
     private String nombre;
     private String apellido;
@@ -20,5 +18,5 @@ public class UsuarioCreate {
     private String celular;
     private String contrasenia;
 
-    private List<Long>id_pedidos;
+    //private List<Long>id_pedidos;
 }

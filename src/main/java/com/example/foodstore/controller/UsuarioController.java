@@ -2,40 +2,44 @@ package com.example.foodstore.controller;
 
 import com.example.foodstore.Services.UsuarioService;
 import com.example.foodstore.entity.dtos.UsuarioCreate;
+import com.example.foodstore.entity.dtos.UsuarioDto;
 import com.example.foodstore.entity.dtos.UsuarioEdit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
-@RequestMapping
+@CrossOrigin("*")
+@RequestMapping ("/usuario")
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
+
     @PostMapping
      public ResponseEntity<?> crear (@RequestBody UsuarioCreate u){
         try {
-            return ResponseEntity.ok().body(usuarioService.crear(u));
+            UsuarioDto usuarioCreado = usuarioService.crear(u);
+            if (usuarioCreado == null) {
+                return ResponseEntity.badRequest().body("El correo ya está registrado");
+            }
+            return ResponseEntity.ok(usuarioCreado);
 
         }catch (Exception e){
 
-            return ResponseEntity.badRequest().body("Ocurrio un error" + e.getMessage());
+            return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
 
         }
     }
 
-
-    @PutMapping
+    @PutMapping ("/{id}")
     public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody UsuarioEdit usuarioEdit){
       try {
           return ResponseEntity.ok().body(usuarioService.actualizar(id,usuarioEdit));
       } catch (Exception e) {
-          return ResponseEntity.badRequest().body("Ocurrio un error" + e.getMessage());
+          return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
       }
 
     }
-
 
     @DeleteMapping("/{id}")
 
@@ -46,9 +50,6 @@ public class UsuarioController {
        }catch (Exception e){
            return ResponseEntity.badRequest().body("Ocurrio un error " +e.getMessage());
        }
-
-
-
     }
 
     @GetMapping
@@ -68,6 +69,4 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body("Ocurrio un error " +e.getMessage());
         }
     }
-
-
 }

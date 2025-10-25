@@ -1,6 +1,5 @@
 package com.example.foodstore.entity.dtos;
 
-import com.example.foodstore.entity.Pedido;
 import com.example.foodstore.entity.Usuario;
 
 import java.util.stream.Collectors;
@@ -18,13 +17,11 @@ public class UsuarioMapper {
                 .apellido(usuario.getApellido())
                 .mail(usuario.getMail())
                 .celular(usuario.getCelular())
-
-
-
                 .build();
         return usuarioDto;
-    }               //Utilizar en el registro
-       public static Usuario toEntity(UsuarioCreate usuarioCreate){
+    }
+    //Utilizar en el registro
+    public static Usuario toEntity(UsuarioCreate usuarioCreate){
         Usuario usuario = new Usuario();
         usuario.setNombre(usuarioCreate.getNombre());
         usuario.setApellido(usuarioCreate.getApellido());
@@ -33,10 +30,4 @@ public class UsuarioMapper {
         usuario.setContrasenia(usuarioCreate.getContrasenia());
         return usuario;
        }
-
-
-
-
-
-
 }
