@@ -60,7 +60,7 @@ public class UsuarioServiceImp implements UsuarioService {
     
     @Override
     public List<UsuarioDto> buscaTodos(){
-        List<Usuario>usuarios=usuarioRepository.findAllByEliminadoFalse();
+        List<Usuario>usuarios=usuarioRepository.findAllByIsEliminadoFalse();
         List<UsuarioDto>usuarioDtos=usuarios.stream().map(UsuarioMapper::toDTo).toList();
         return usuarioDtos;
     }

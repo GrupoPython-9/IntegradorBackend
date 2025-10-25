@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
-    List<Usuario> findAllByEliminadoFalse();
+    List<Usuario> findAllByIsEliminadoFalse();
 
     // Buscar un usuario por mail (para login)
     Optional<Usuario> findByMail(String mail);

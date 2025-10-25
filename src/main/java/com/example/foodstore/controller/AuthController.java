@@ -5,9 +5,11 @@ import com.example.foodstore.entity.Usuario;
 import com.example.foodstore.entity.dtos.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@CrossOrigin("*")
 public class AuthController {
     @Autowired
     AuthService authService;
