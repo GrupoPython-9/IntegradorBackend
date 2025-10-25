@@ -16,10 +16,10 @@ public class UsuarioDto {
     private String nombre;
     private String apellido;
     private String mail;
-    private int celular;
-    private String contrasenia;
+    private String celular;
 
-    private List<String> pedidos_nombres;
+
+
 
 
 
