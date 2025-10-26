@@ -1,5 +1,6 @@
 package com.example.foodstore.Services;
 
+import com.example.foodstore.Utils.HashUtil;
 import com.example.foodstore.entity.Usuario;
 import com.example.foodstore.entity.dtos.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,10 @@ public class AuthServiceImp implements AuthService {
 
         Usuario usuario = usuarioOptional.get();
 
-        // Por ahora comparación simple de contraseñas (después usar hash)
-        if (!usuario.getContrasenia().equals(usuarioLoginDto.getContrasenia())) {
+        if (!usuario.getContrasenia().equals(HashUtil.sha256(usuarioLoginDto.getContrasenia()))) {
             throw new Exception("Contraseña incorrecta");
         }
+
         return usuario;
     }
 }

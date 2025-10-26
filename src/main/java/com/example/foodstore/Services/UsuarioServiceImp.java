@@ -1,6 +1,8 @@
 package com.example.foodstore.Services;
 
 import com.example.foodstore.Repository.UsuarioRepository;
+import com.example.foodstore.Utils.HashUtil;
+import com.example.foodstore.entity.Rol;
 import com.example.foodstore.entity.Usuario;
 import com.example.foodstore.entity.dtos.UsuarioCreate;
 import com.example.foodstore.entity.dtos.UsuarioDto;
@@ -9,6 +11,8 @@ import com.example.foodstore.entity.dtos.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +27,10 @@ public class UsuarioServiceImp implements UsuarioService {
             return null;
         }
         Usuario usuario = UsuarioMapper.toEntity(u);
+        //Ahi se utiliza el metodo hash
+        String hash = HashUtil.sha256(usuario.getContrasenia());
+        usuario.setContrasenia(hash);
+        usuario.setRol(Rol.USUARIO);
         usuario = usuarioRepository.save(usuario);
         UsuarioDto usuarioDto = UsuarioMapper.toDTo(usuario);
         return usuarioDto;
@@ -41,7 +49,11 @@ public class UsuarioServiceImp implements UsuarioService {
             //usuario.setApellido(u.getApellido());
             usuario.setMail(u.getMail());
             usuario.setCelular(u.getCelular());
-            usuario.setContrasenia(u.getContrasenia());
+
+            if (u.getContrasenia() != null && !u.getContrasenia().isEmpty()) {
+                usuario.setContrasenia(HashUtil.sha256(u.getContrasenia()));
+            }
+
             usuario = usuarioRepository.save(usuario);
             return UsuarioMapper.toDTo(usuario);
         }
@@ -75,7 +87,6 @@ public class UsuarioServiceImp implements UsuarioService {
         }
     }
 
-    //MEtodo para hashear
 }
 
 

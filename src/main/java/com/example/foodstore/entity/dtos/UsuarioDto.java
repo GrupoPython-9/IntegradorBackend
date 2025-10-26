@@ -1,5 +1,6 @@
 package com.example.foodstore.entity.dtos;
 
+import com.example.foodstore.entity.Rol;
 import lombok.*;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class UsuarioDto {
     private String apellido;
     private String mail;
     private String celular;
-
+    private Rol rol; //Para el front
 
 
 

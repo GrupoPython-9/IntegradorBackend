@@ -17,6 +17,7 @@ public class UsuarioMapper {
                 .apellido(usuario.getApellido())
                 .mail(usuario.getMail())
                 .celular(usuario.getCelular())
+                .rol(usuario.getRol())
                 .build();
         return usuarioDto;
     }

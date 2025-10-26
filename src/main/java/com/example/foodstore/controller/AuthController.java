@@ -5,11 +5,11 @@ import com.example.foodstore.entity.Usuario;
 import com.example.foodstore.entity.dtos.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+@RestController
 @CrossOrigin("*")
+@RequestMapping("/auth")
 public class AuthController {
     @Autowired
     AuthService authService;
@@ -17,10 +17,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody UsuarioLoginDto usuarioLoginDto) {
         try {
-            // Llama al servicio de autenticación
+            // servicio de autenticación
             Usuario usuario = authService.login(usuarioLoginDto);
 
-            // Devuelve el usuario o un token si luego implementas JWT
+            // Devuelve el usuario
             return ResponseEntity.ok().body(usuario);
 
         } catch (Exception e) {
