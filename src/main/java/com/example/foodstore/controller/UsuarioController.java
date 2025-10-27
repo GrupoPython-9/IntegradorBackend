@@ -9,13 +9,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(
+        origins = "http://localhost:5173",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
+        allowedHeaders = "*"
+)
 @RequestMapping ("/usuario")
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @PostMapping
+    @PostMapping("")
      public ResponseEntity<?> crear (@RequestBody UsuarioCreate u){
         try {
             UsuarioDto usuarioCreado = usuarioService.crear(u);
@@ -52,7 +56,7 @@ public class UsuarioController {
        }
     }
 
-    @GetMapping
+    @GetMapping("")
     public ResponseEntity<?> buscaTodos(){
         try {
             return ResponseEntity.ok().body(usuarioService.buscaTodos());

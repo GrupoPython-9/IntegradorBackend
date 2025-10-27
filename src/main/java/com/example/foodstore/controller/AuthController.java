@@ -8,7 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(
+        origins = "http://localhost:5173",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE},
+        allowedHeaders = "*"
+)
 @RequestMapping("/auth")
 public class AuthController {
     @Autowired
