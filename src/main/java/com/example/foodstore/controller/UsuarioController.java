@@ -29,7 +29,8 @@ public class UsuarioController {
             return ResponseEntity.ok(usuarioCreado);
 
         }catch (Exception e){
-
+            //prueba
+            e.printStackTrace();
             return ResponseEntity.badRequest().body("Ocurrio un error: " + e.getMessage());
 
         }

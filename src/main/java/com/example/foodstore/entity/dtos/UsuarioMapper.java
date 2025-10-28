@@ -1,5 +1,6 @@
 package com.example.foodstore.entity.dtos;
 
+import com.example.foodstore.entity.Rol;
 import com.example.foodstore.entity.Usuario;
 
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ public class UsuarioMapper {
         usuario.setMail(usuarioCreate.getMail());
         usuario.setCelular(usuarioCreate.getCelular());
         usuario.setContrasenia(usuarioCreate.getContrasenia());
+        usuario.setRol(Rol.USUARIO);
         return usuario;
        }
 }
