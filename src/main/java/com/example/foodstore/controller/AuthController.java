@@ -2,7 +2,7 @@ package com.example.foodstore.controller;
 
 import com.example.foodstore.Services.AuthService;
 import com.example.foodstore.entity.Usuario;
-import com.example.foodstore.entity.dtos.UsuarioLoginDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

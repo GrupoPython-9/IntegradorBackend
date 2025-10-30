@@ -2,7 +2,7 @@ package com.example.foodstore.Services;
 
 import com.example.foodstore.Utils.HashUtil;
 import com.example.foodstore.entity.Usuario;
-import com.example.foodstore.entity.dtos.UsuarioLoginDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.foodstore.Repository.UsuarioRepository;

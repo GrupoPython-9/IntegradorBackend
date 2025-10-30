@@ -1,8 +1,6 @@
-package com.example.foodstore.entity.dtos;
+package com.example.foodstore.entity.dtos.Usuario;
 
 import lombok.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,8 +1,8 @@
 package com.example.foodstore.Services;
 
-import com.example.foodstore.entity.dtos.UsuarioCreate;
-import com.example.foodstore.entity.dtos.UsuarioDto;
-import com.example.foodstore.entity.dtos.UsuarioEdit;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioCreate;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioEdit;
 
 import java.util.List;
 

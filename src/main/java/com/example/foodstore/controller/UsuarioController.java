@@ -1,9 +1,9 @@
 package com.example.foodstore.controller;
 
 import com.example.foodstore.Services.UsuarioService;
-import com.example.foodstore.entity.dtos.UsuarioCreate;
-import com.example.foodstore.entity.dtos.UsuarioDto;
-import com.example.foodstore.entity.dtos.UsuarioEdit;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioCreate;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioEdit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

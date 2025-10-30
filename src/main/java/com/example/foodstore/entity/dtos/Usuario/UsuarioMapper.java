@@ -1,9 +1,7 @@
-package com.example.foodstore.entity.dtos;
+package com.example.foodstore.entity.dtos.Usuario;
 
 import com.example.foodstore.entity.Rol;
 import com.example.foodstore.entity.Usuario;
-
-import java.util.stream.Collectors;
 
 public class UsuarioMapper {
 

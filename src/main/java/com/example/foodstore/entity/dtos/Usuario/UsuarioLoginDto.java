@@ -1,4 +1,4 @@
-package com.example.foodstore.entity.dtos;
+package com.example.foodstore.entity.dtos.Usuario;
 
 import lombok.*;
 

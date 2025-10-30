@@ -13,15 +13,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Categoria {
+public class Categoria extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;
+    private String descripcion;
 
-    @OneToMany
-    @JoinColumn
+    @OneToMany(cascade = CascadeType.ALL) //Todas las operaciones que hagamos se aplican a productos asociados
+    @JoinColumn(name = "categoria_id") //Es para guardar la relacion
     @Builder.Default
     private List<Producto> productos = new ArrayList<>();
+
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
 }

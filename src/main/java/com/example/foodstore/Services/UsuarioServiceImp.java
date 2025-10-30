@@ -4,15 +4,13 @@ import com.example.foodstore.Repository.UsuarioRepository;
 import com.example.foodstore.Utils.HashUtil;
 import com.example.foodstore.entity.Rol;
 import com.example.foodstore.entity.Usuario;
-import com.example.foodstore.entity.dtos.UsuarioCreate;
-import com.example.foodstore.entity.dtos.UsuarioDto;
-import com.example.foodstore.entity.dtos.UsuarioEdit;
-import com.example.foodstore.entity.dtos.UsuarioMapper;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioCreate;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioEdit;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
