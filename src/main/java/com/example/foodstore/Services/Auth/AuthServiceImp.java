@@ -1,4 +1,4 @@
-package com.example.foodstore.Services;
+package com.example.foodstore.Services.Auth;
 
 import com.example.foodstore.Utils.HashUtil;
 import com.example.foodstore.entity.Usuario;

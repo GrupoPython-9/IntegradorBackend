@@ -1,6 +1,6 @@
 package com.example.foodstore.controller;
 
-import com.example.foodstore.Services.UsuarioService;
+import com.example.foodstore.Services.Usuario.UsuarioService;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioCreate;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioEdit;

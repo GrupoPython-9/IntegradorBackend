@@ -21,5 +21,10 @@ public class CategoriaMapper {
         return categoria;
     }
 
-
+    public static Categoria toEdit(CategoriaEdit categoriaEdit){
+        Categoria categoria = new Categoria();
+        categoria.setNombre(categoriaEdit.getNombre());
+        categoria.setDescripcion(categoriaEdit.getDescripcion());
+        return categoria;
+    }
 }

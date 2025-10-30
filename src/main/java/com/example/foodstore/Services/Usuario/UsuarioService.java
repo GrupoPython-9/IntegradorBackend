@@ -1,4 +1,4 @@
-package com.example.foodstore.Services;
+package com.example.foodstore.Services.Usuario;
 
 import com.example.foodstore.entity.dtos.Usuario.UsuarioCreate;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;

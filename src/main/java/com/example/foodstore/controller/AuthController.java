@@ -1,6 +1,6 @@
 package com.example.foodstore.controller;
 
-import com.example.foodstore.Services.AuthService;
+import com.example.foodstore.Services.Auth.AuthService;
 import com.example.foodstore.entity.Usuario;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
