@@ -7,10 +7,12 @@ import com.example.foodstore.entity.dtos.Producto.ProductoDto;
 import com.example.foodstore.entity.dtos.Producto.ProductoEdit;
 import com.example.foodstore.entity.dtos.Producto.ProductoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductoServiceImp implements ProductoService {
 
     @Autowired
@@ -72,7 +74,7 @@ public class ProductoServiceImp implements ProductoService {
 
     @Override
     public List<ProductoDto> buscaTodos() {
-        List<Producto> productos = productoRepository.findAllByIsEliminadoFalse();
+        List<Producto> productos = productoRepository.findAllByEliminadoFalse();
         List<ProductoDto> productoDtos = productos.stream().map(ProductoMapper::toDto).toList();
         return productoDtos;
     }

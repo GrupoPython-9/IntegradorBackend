@@ -8,12 +8,9 @@ import com.example.foodstore.entity.dtos.Categoria.CategoriaCreate;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaDto;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaEdit;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaMapper;
-import com.example.foodstore.entity.dtos.Producto.ProductoCreate;
-import com.example.foodstore.entity.dtos.Producto.ProductoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -115,7 +112,7 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-    public CategoriaDto agregarProductoExistente(Long categoriaId, Long productoId) {
+    public CategoriaDto agregarProducto(Long categoriaId, Long productoId) {
         Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(categoriaId);
         if (categoriaOptional.isEmpty()) {
             throw new RuntimeException("Categoría no encontrada");

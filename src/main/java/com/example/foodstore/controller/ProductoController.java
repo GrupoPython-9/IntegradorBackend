@@ -53,14 +53,14 @@ public class ProductoController {
     public ResponseEntity<?>borrar(@PathVariable Long id){
         try {
             productoService.eliminar(id);
-            return ResponseEntity.ok().body("Entidad eliminada");
+            return ResponseEntity.ok().body("Entidad eliminada");//Cambiar por algo del producto
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Ocurrio un error " +e.getMessage());
         }
     }
 
     @GetMapping("")
-    public ResponseEntity<?> buscaTodos(){
+    public ResponseEntity<?> buscaTodos(){ //Hacer que no muestre las eliminadas
         try {
             return ResponseEntity.ok().body(productoService.buscaTodos());
         }catch (Exception e){
