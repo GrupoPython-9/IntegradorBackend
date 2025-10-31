@@ -72,7 +72,7 @@ public class ProductoServiceImp implements ProductoService {
 
     @Override
     public List<ProductoDto> buscaTodos() {
-        List<Producto> productos = productoRepository.findAllByEliminadoFalse();
+        List<Producto> productos = productoRepository.findAllByIsEliminadoFalse();
         List<ProductoDto> productoDtos = productos.stream().map(ProductoMapper::toDTO).toList();
         return productoDtos;
     }

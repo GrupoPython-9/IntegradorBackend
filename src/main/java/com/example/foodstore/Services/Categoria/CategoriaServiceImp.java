@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class giCategoriaServiceImp implements CategoriaService {
+public class CategoriaServiceImp implements CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
