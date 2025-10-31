@@ -2,10 +2,13 @@ package com.example.foodstore.Services.Categoria;
 
 import com.example.foodstore.Repository.CategoriaRepository;
 import com.example.foodstore.entity.Categoria;
+import com.example.foodstore.entity.Producto;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaCreate;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaDto;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaEdit;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaMapper;
+import com.example.foodstore.entity.dtos.Producto.ProductoCreate;
+import com.example.foodstore.entity.dtos.Producto.ProductoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +25,7 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Override
     public CategoriaDto crear(CategoriaCreate c) {
-        if (c.getNombre() == null || categoriaRepository.existsByNombreAndIsEliminadoFalse(c.getNombre())) {
+        if (c.getNombre() == null || categoriaRepository.existsByNombreAndEliminadoFalse(c.getNombre())) {
             throw new RuntimeException("La categoría ya existe");
         }
         Categoria categoria = CategoriaMapper.toEntity(c);
@@ -44,7 +47,7 @@ public class CategoriaServiceImp implements CategoriaService {
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
 
         //Validar duplicado excluyendo la categoria actual.
-        boolean nombreDuplicado = categoriaRepository.existsByNombreAndIsEliminadoFalse(c.getNombre())
+        boolean nombreDuplicado = categoriaRepository.existsByNombreAndEliminadoFalse(c.getNombre())
                 && !categoria.getNombre().equals(c.getNombre());
         if (nombreDuplicado) {
             throw new RuntimeException("Ya existe otra categoría con ese nombre");
@@ -60,7 +63,7 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Override
     public CategoriaDto leer(Long id) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndIsEliminadoFalse(id);
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(id);
         if (categoriaOptional.isPresent()) {
             Categoria categoria = categoriaOptional.get();
             return CategoriaMapper.toDto(categoria);
@@ -72,7 +75,7 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Override
     public void eliminar(Long id) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndIsEliminadoFalse(id);
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(id);
         if (categoriaOptional.isPresent()) {
             Categoria categoria = categoriaOptional.get();
             categoria.setEliminado(true);
@@ -84,7 +87,7 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Override
     public CategoriaDto restaurar(Long id) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndIsEliminadoTrue(id);
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoTrue(id);
         if (categoriaOptional.isPresent()) {
             Categoria categoria = categoriaOptional.get();
             categoria.setEliminado(false);
@@ -97,10 +100,23 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Override
     public List<CategoriaDto> listar() {
-        List<Categoria> categorias = categoriaRepository.findAllByIsEliminadoFalse();
+        List<Categoria> categorias = categoriaRepository.findAllByEliminadoFalse();
 
         return categorias.stream()
                 .map(CategoriaMapper::toDto)   // Mapea cada entidad a DTO
                 .collect(Collectors.toList()); // Recolecta en una lista de DTOs
+    }
+
+    @Override
+    public CategoriaDto agregarProducto(Long id, ProductoCreate p) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(id);
+        if (categoriaOptional.isEmpty()) {
+            throw new RuntimeException("Categoría no encontrada");
+        }
+        Categoria categoria = categoriaOptional.get();
+        Producto producto = ProductoMapper.toEntity(p);
+        categoria.agregarProducto(producto);
+        categoria = categoriaRepository.save(categoria);
+        return CategoriaMapper.toDto(categoria);
     }
 }

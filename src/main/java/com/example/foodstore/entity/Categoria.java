@@ -27,6 +27,8 @@ public class Categoria extends Base {
     private List<Producto> productos = new ArrayList<>();
 
     public void agregarProducto(Producto producto) {
-        productos.add(producto);
+        if (!productos.contains(producto)) {
+            productos.add(producto);
+        }
     }
 }
