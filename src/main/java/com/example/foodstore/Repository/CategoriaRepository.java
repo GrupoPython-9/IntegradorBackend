@@ -18,6 +18,8 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
     boolean existsByNombreAndIsEliminadoFalse(String nombre);
 
+    Optional<Categoria> findByIdAndIsEliminadoTrue(Long id);
+
     void delete(Categoria categoria);
 
 }
