@@ -1,15 +1,28 @@
 package com.example.foodstore.entity.dtos.Categoria;
 
 import com.example.foodstore.entity.Categoria;
+import com.example.foodstore.entity.Producto;
+import com.example.foodstore.entity.dtos.Producto.ProductoDto;
+import com.example.foodstore.entity.dtos.Producto.ProductoMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriaMapper {
 
     public static CategoriaDto toDto(Categoria categoria){
+        List<ProductoDto> productosDto = new ArrayList<>();
+        if (categoria.getProductos() != null) {
+            for (Producto producto : categoria.getProductos()) {
+                ProductoDto productoDto = ProductoMapper.toDto(producto);
+                productosDto.add(productoDto);
+            }
+        }
         return new CategoriaDto.CategoriaDtoBuilder()
                 .id(categoria.getId())
                 .nombre(categoria.getNombre())
                 .descripcion(categoria.getDescripcion())
-                .productos(categoria.getProductos())
+                .productos(productosDto)
                 .build();
     }
 
