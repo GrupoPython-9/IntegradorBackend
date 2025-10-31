@@ -27,7 +27,7 @@ public class ProductoServiceImp implements ProductoService {
 
         // Se convierte nuevamente la entidad persistida en un DTO de salida.
         // Esto asegura que solo se expongan los datos necesarios.
-        ProductoDto productoDto = ProductoMapper.toDTO(producto);
+        ProductoDto productoDto = ProductoMapper.toDto(producto);
 
         // Se retorna el DTO con la información final (incluye ID generado).
         return productoDto;
@@ -54,7 +54,7 @@ public class ProductoServiceImp implements ProductoService {
             producto = productoRepository.save(producto);
 
             // Se convierte la entidad persistida a un DTO de salida para retornarla.
-            return ProductoMapper.toDTO(producto);
+            return ProductoMapper.toDto(producto);
         }
 
         return null;
@@ -65,7 +65,7 @@ public class ProductoServiceImp implements ProductoService {
         Optional<Producto> productoOptional = productoRepository.findById(id);
         if (productoOptional.isPresent() ){
             if (!productoOptional.get().isEliminado())//Agregar isEliminado
-                return ProductoMapper.toDTO(productoOptional.get());
+                return ProductoMapper.toDto(productoOptional.get());
         }
         return null;
     }
@@ -73,7 +73,7 @@ public class ProductoServiceImp implements ProductoService {
     @Override
     public List<ProductoDto> buscaTodos() {
         List<Producto> productos = productoRepository.findAllByIsEliminadoFalse();
-        List<ProductoDto> productoDtos = productos.stream().map(ProductoMapper::toDTO).toList();
+        List<ProductoDto> productoDtos = productos.stream().map(ProductoMapper::toDto).toList();
         return productoDtos;
     }
 

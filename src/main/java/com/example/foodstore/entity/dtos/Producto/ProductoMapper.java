@@ -4,7 +4,7 @@ import com.example.foodstore.entity.Producto;
 
 public class ProductoMapper {
 
- public static    ProductoDto toDTO(Producto p){
+ public static    ProductoDto toDto(Producto p){
         ProductoDto productoDto=new ProductoDto.ProductoDtoBuilder()
                 .id(p.getId())
                 .nombre(p.getNombre())
