@@ -9,8 +9,7 @@ import lombok.*;
 @Setter
 
 public class ProductoCreate {
-
-
+    
     private String nombre;
     private double precio;
     private String descripcion;
