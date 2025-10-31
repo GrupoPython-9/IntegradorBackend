@@ -1,6 +1,7 @@
 package com.example.foodstore.Services.Categoria;
 
 import com.example.foodstore.Repository.CategoriaRepository;
+import com.example.foodstore.Repository.ProductoRepository;
 import com.example.foodstore.entity.Categoria;
 import com.example.foodstore.entity.Producto;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaCreate;
@@ -22,6 +23,8 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private ProductoRepository productoRepository;
 
     @Override
     public CategoriaDto crear(CategoriaCreate c) {
@@ -76,26 +79,30 @@ public class CategoriaServiceImp implements CategoriaService {
     @Override
     public void eliminar(Long id) {
         Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(id);
-        if (categoriaOptional.isPresent()) {
-            Categoria categoria = categoriaOptional.get();
-            categoria.setEliminado(true);
-            categoriaRepository.save(categoria);
-        } else {
-            throw new RuntimeException("Categoria ya eliminada");
+        if (categoriaOptional.isEmpty()) {
+            throw new RuntimeException("Categoría no encontrada o ya eliminada");
         }
+        Categoria categoria = categoriaOptional.get();
+        categoria.setEliminado(true);
+        for (Producto producto : categoria.getProductos()) {
+            producto.setEliminado(true);
+        }
+        categoriaRepository.save(categoria);
     }
 
     @Override
     public CategoriaDto restaurar(Long id) {
         Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoTrue(id);
-        if (categoriaOptional.isPresent()) {
-            Categoria categoria = categoriaOptional.get();
-            categoria.setEliminado(false);
-            categoriaRepository.save(categoria);
-            return CategoriaMapper.toDto(categoria);
-        } else {
-            throw new RuntimeException("No se puede restaurar una categoría que ya está activa");
+        if (categoriaOptional.isEmpty()) {
+            throw new RuntimeException("Categoría no encontrada o ya activa");
         }
+        Categoria categoria = categoriaOptional.get();
+        categoria.setEliminado(false);
+        for (Producto producto : categoria.getProductos()) {
+            producto.setEliminado(false);
+        }
+        categoria = categoriaRepository.save(categoria);
+        return CategoriaMapper.toDto(categoria);
     }
 
     @Override
@@ -108,13 +115,18 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-    public CategoriaDto agregarProducto(Long id, ProductoCreate p) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(id);
+    public CategoriaDto agregarProductoExistente(Long categoriaId, Long productoId) {
+        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoFalse(categoriaId);
         if (categoriaOptional.isEmpty()) {
             throw new RuntimeException("Categoría no encontrada");
         }
         Categoria categoria = categoriaOptional.get();
-        Producto producto = ProductoMapper.toEntity(p);
+
+        Optional<Producto> productoOptional = productoRepository.findByIdAndEliminadoFalse(productoId);
+        if (productoOptional.isEmpty()) {
+            throw new RuntimeException("Producto no encontrado");
+        }
+        Producto producto = productoOptional.get();
         categoria.agregarProducto(producto);
         categoria = categoriaRepository.save(categoria);
         return CategoriaMapper.toDto(categoria);

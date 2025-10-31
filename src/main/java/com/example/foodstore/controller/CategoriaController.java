@@ -5,6 +5,7 @@ import com.example.foodstore.entity.dtos.Categoria.CategoriaCreate;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaDto;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaEdit;
 import com.example.foodstore.entity.dtos.Categoria.CategoriaResponse;
+import com.example.foodstore.entity.dtos.Producto.ProductoCreate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -145,6 +146,27 @@ public class CategoriaController {
             CategoriaDto categoria = categoriaService.restaurar(id);
             CategoriaResponse response = new CategoriaResponse(200, "Categoria restaurada correctamente", categoria);
             return ResponseEntity.ok(response);
+        } catch (RuntimeException e) {
+            CategoriaResponse response = new CategoriaResponse(404, e.getMessage(), null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+
+        } catch (Exception e) {
+            CategoriaResponse response = new CategoriaResponse(500, "Error interno del servidor", null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+
+    @PostMapping("/{categoriaId}/productos/{productoId}")
+    public ResponseEntity<CategoriaResponse> agregarProducto(@PathVariable Long categoriaId, @PathVariable Long productoId) {
+        try {
+            if (categoriaId == null || productoId == null) {
+                CategoriaResponse response = new CategoriaResponse(400, "ID de categoría o producto inválido", null);
+                return ResponseEntity.badRequest().body(response);
+            }
+            CategoriaDto categoriaActualizada = categoriaService.agregarProducto(categoriaId, productoId);
+            CategoriaResponse response = new CategoriaResponse(200, "Producto agregado correctamente", categoriaActualizada);
+            return ResponseEntity.ok(response);
+
         } catch (RuntimeException e) {
             CategoriaResponse response = new CategoriaResponse(404, e.getMessage(), null);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
