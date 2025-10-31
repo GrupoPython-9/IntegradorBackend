@@ -6,17 +6,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-    List<Categoria> findAllByIsEliminadoFalse();
+    List<Categoria> findAllByEliminadoFalse();
     //Para ver los eliminados
-    List<Categoria> findAllByIsEliminadoTrue();
+    List<Categoria> findAllByEliminadoTrue();
 
     Optional<Categoria> findById(Long id);
 
     Categoria save (Categoria categoria);
 
-    Optional<Categoria> findByIdAndIsEliminadoFalse(Long id);
+    Optional<Categoria> findByIdAndEliminadoFalse(Long id);
 
-    boolean existsByNombreAndIsEliminadoFalse(String nombre);
+    boolean existsByNombreAndEliminadoFalse(String nombre);
+
+    Optional<Categoria> findByIdAndEliminadoTrue(Long id);
 
     void delete(Categoria categoria);
 
