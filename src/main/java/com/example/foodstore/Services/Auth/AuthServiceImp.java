@@ -2,7 +2,9 @@ package com.example.foodstore.Services.Auth;
 
 import com.example.foodstore.Utils.HashUtil;
 import com.example.foodstore.entity.Usuario;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioLoginDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.foodstore.Repository.UsuarioRepository;
@@ -16,8 +18,14 @@ public class AuthServiceImp implements AuthService {
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public Usuario login(UsuarioLoginDto usuarioLoginDto) throws Exception {
+    public UsuarioDto login(UsuarioLoginDto usuarioLoginDto) throws Exception {
 
+        // Validación del correo
+        if (usuarioLoginDto.getMail() == null || usuarioLoginDto.getMail().isBlank()) {
+            throw new Exception("Correo inválido");
+        }
+
+        // Buscar usuario por mail
         Optional<Usuario> usuarioOptional = usuarioRepository.findByMail(usuarioLoginDto.getMail());
 
         if (usuarioOptional.isEmpty()) {
@@ -30,6 +38,6 @@ public class AuthServiceImp implements AuthService {
             throw new Exception("Contraseña incorrecta");
         }
 
-        return usuario;
+        return UsuarioMapper.toDTo(usuario);
     }
 }

@@ -2,7 +2,9 @@ package com.example.foodstore.controller;
 
 import com.example.foodstore.Services.Auth.AuthService;
 import com.example.foodstore.entity.Usuario;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioDto;
 import com.example.foodstore.entity.dtos.Usuario.UsuarioLoginDto;
+import com.example.foodstore.entity.dtos.Usuario.UsuarioMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +24,10 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody UsuarioLoginDto usuarioLoginDto) {
         try {
             // servicio de autenticación
-            Usuario usuario = authService.login(usuarioLoginDto);
+            UsuarioDto usuarioDto = authService.login(usuarioLoginDto);
 
             // Devuelve el usuario
-            return ResponseEntity.ok().body(usuario);
+            return ResponseEntity.ok().body(usuarioDto);
 
         } catch (Exception e) {
             // Maneja errores de login (usuario no encontrado o contraseña incorrecta)
