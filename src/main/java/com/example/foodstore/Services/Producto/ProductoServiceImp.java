@@ -43,7 +43,7 @@ public class ProductoServiceImp implements ProductoService {
         //SOLUCION OPTIMA AUN NO EXPLICADA
         //Persona person = personaRepository.findById(id).orElseThrow(()->new NullPointerException("No se encontró el ID del desarrollador");
 
-        // Se valida si la Persona existe.
+
         if(productoOptional.isPresent()){
             // Si existe, se obtiene la entidad.
             Producto producto = productoOptional.get();
@@ -66,7 +66,7 @@ public class ProductoServiceImp implements ProductoService {
     public ProductoDto buscaId(Long id) {
         Optional<Producto> productoOptional = productoRepository.findById(id);
         if (productoOptional.isPresent() ){
-            if (!productoOptional.get().isEliminado())//Agregar isEliminado
+            if (!productoOptional.get().isEliminado())
                 return ProductoMapper.toDto(productoOptional.get());
         }
         return null;
