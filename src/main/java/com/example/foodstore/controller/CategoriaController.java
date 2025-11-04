@@ -136,26 +136,6 @@ public class CategoriaController {
         }
     }
 
-    @PutMapping("/restaurar/{id}")
-    public ResponseEntity<CategoriaResponse> restaurar(@PathVariable Long id) {
-        try {
-            if (id == null) {
-                CategoriaResponse response = new CategoriaResponse(400, "Id invalido", null);
-                return ResponseEntity.badRequest().body(response);
-            }
-            CategoriaDto categoria = categoriaService.restaurar(id);
-            CategoriaResponse response = new CategoriaResponse(200, "Categoria restaurada correctamente", categoria);
-            return ResponseEntity.ok(response);
-        } catch (RuntimeException e) {
-            CategoriaResponse response = new CategoriaResponse(404, e.getMessage(), null);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-
-        } catch (Exception e) {
-            CategoriaResponse response = new CategoriaResponse(500, "Error interno del servidor", null);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
-    }
-
     @PostMapping("/{categoriaId}/productos/{productoId}")
     public ResponseEntity<CategoriaResponse> agregarProducto(@PathVariable Long categoriaId, @PathVariable Long productoId) {
         try {

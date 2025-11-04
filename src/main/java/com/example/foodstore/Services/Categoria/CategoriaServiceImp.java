@@ -88,21 +88,6 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-    public CategoriaDto restaurar(Long id) {
-        Optional<Categoria> categoriaOptional = categoriaRepository.findByIdAndEliminadoTrue(id);
-        if (categoriaOptional.isEmpty()) {
-            throw new RuntimeException("Categoría no encontrada o ya activa");
-        }
-        Categoria categoria = categoriaOptional.get();
-        categoria.setEliminado(false);
-        for (Producto producto : categoria.getProductos()) {
-            producto.setEliminado(false);
-        }
-        categoria = categoriaRepository.save(categoria);
-        return CategoriaMapper.toDto(categoria);
-    }
-
-    @Override
     public List<CategoriaDto> listar() {
         List<Categoria> categorias = categoriaRepository.findAllByEliminadoFalse();
 

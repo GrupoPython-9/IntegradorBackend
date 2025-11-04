@@ -22,6 +22,7 @@ public class CategoriaMapper {
                 .id(categoria.getId())
                 .nombre(categoria.getNombre())
                 .descripcion(categoria.getDescripcion())
+                .imagen(categoria.getImagen())
                 .productos(productosDto)
                 .build();
     }
@@ -30,6 +31,7 @@ public class CategoriaMapper {
         return Categoria.builder()
                 .nombre(categoriaCreate.getNombre())
                 .descripcion(categoriaCreate.getDescripcion())
+                .imagen(categoriaCreate.getImagen())
                 .build();
     }
 
@@ -37,6 +39,7 @@ public class CategoriaMapper {
         return Categoria.builder()
                 .nombre(categoriaEdit.getNombre())
                 .descripcion(categoriaEdit.getDescripcion())
+                .imagen(categoriaEdit.getImagen())
                 .build();
     }
 }

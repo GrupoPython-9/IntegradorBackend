@@ -15,7 +15,7 @@ public interface CategoriaService {
     public CategoriaDto leer (Long id); //GET
     public void eliminar (Long id); //DELETE
     public List<CategoriaDto> listar(); //GET
-    public CategoriaDto restaurar(Long id);
+
     public CategoriaDto agregarProducto (Long categoriaId, Long productoId);
 
 }

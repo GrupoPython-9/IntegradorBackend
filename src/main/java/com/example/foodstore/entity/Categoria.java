@@ -20,6 +20,7 @@ public class Categoria extends Base {
 
     private String nombre;
     private String descripcion;
+    private String imagen;
 
     @OneToMany(cascade = CascadeType.ALL) //Todas las operaciones que hagamos se aplican a productos asociados
     @JoinColumn(name = "categoria_id") //Es para guardar la relacion
