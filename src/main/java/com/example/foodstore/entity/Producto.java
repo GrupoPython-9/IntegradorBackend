@@ -23,6 +23,7 @@ public class Producto extends Base{
     private double precio;
     private String descripcion;
     private int stock;
+    private String imagen;
 
 
     @Builder.Default

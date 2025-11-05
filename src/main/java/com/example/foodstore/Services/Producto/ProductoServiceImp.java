@@ -52,6 +52,7 @@ public class ProductoServiceImp implements ProductoService {
             producto.setPrecio(p.getPrecio());
             producto.setStock(p.getStock());
 
+
             // Se guarda nuevamente la entidad actualizada en la base de datos.
             producto = productoRepository.save(producto);
 

@@ -11,6 +11,7 @@ public class ProductoMapper {
                 .descripcion(p.getDescripcion())
                 .precio(p.getPrecio())
                 .stock(p.getStock())
+                .imagen(p.getImagen())
                 .build();
         return productoDto;
 
@@ -23,6 +24,7 @@ public class ProductoMapper {
              producto.setDescripcion(pc.getDescripcion());
              producto.setPrecio(pc.getPrecio());
              producto.setStock(pc.getStock());
+             producto.setImagen(pc.getImagen());
 
 
           return producto;

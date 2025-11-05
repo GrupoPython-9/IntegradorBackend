@@ -27,5 +27,12 @@ public class DetallePedido {
     @JoinColumn
     private Producto producto;
 
+
+    public double obtenerSubtotal(){
+
+        this.subtotal= cantidad* producto.getPrecio();
+        return subtotal;
+    }
+
 }
 
