@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 
-public class DetallePedido {
+public class DetallePedido extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +24,7 @@ public class DetallePedido {
 
     //COnsultar
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name="producto_id")
     private Producto producto;
 
 

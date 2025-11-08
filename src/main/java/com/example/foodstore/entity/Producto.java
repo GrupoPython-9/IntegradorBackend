@@ -1,12 +1,14 @@
 package com.example.foodstore.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
 
 @Entity
 @Getter
@@ -25,7 +27,30 @@ public class Producto extends Base{
     private int stock;
     private String imagen;
 
+    @OneToMany(cascade = CascadeType.ALL) //Todas las operaciones que hagamos se aplican a productos asociados
+    @JoinColumn(name = "poducto_id")
 
-    @Builder.Default
-    private boolean isEliminado = false;
+    g
+
+    public void agregarDetalleProducto(DetallePedido detallePedido) {
+        if (!detallePedidos.contains(detallePedido)) {
+            detallePedidos.add(detallePedido);
+        }
+    }
+
+
+
+
+    public int actualizarStock() {
+        if (detallePedidos != null && !detallePedidos.isEmpty()) {
+            stock -= detallePedidos.last().getCantidad();
+        }
+        return stock;
+    }
+
+
+
+
+
+
 }

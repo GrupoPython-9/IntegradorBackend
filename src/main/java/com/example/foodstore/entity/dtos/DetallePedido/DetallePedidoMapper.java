@@ -16,7 +16,7 @@ public class DetallePedidoMapper {
         DetallePedidoDto detallePedidoDto=new DetallePedidoDto.DetallePedidoDtoBuilder()
                 .id(detallePedido.getId())
                 .cantidad(detallePedido.getCantidad())
-                .subtotal(detallePedido.obtenerSubtotal()) //ver si esta bien
+                .subtotal(detallePedido.getSubtotal()) //ver si esta bien
                 .producto_nombre(detallePedido.getProducto().getNombre())
                 .build();
         return detallePedidoDto;

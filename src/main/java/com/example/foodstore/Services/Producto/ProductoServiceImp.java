@@ -82,9 +82,9 @@ public class ProductoServiceImp implements ProductoService {
 
     @Override
     public void eliminar(Long id) {
-        Optional<Producto> persona = productoRepository.findById(id);
-        if (persona.isPresent()){
-            Producto p = persona.get();
+        Optional<Producto> producto = productoRepository.findById(id);
+        if (producto.isPresent()){
+            Producto p = producto.get();
             p.setEliminado(true);
             productoRepository.save(p);
         }
