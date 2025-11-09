@@ -27,10 +27,13 @@ public class Producto extends Base{
     private int stock;
     private String imagen;
 
-    @OneToMany(cascade = CascadeType.ALL) //Todas las operaciones que hagamos se aplican a productos asociados
-    @JoinColumn(name = "poducto_id")
+    //@OneToMany(cascade = CascadeType.ALL) //Todas las operaciones que hagamos se aplican a productos asociados
+    //@JoinColumn(name = "producto_id")
+    //Lo dejo comentado para marcar la diferencia ↑ ↓
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)//Corregí el @JoinColumn ya que va del lado @ManyToOne en DetallePedido
+    private List<DetallePedido> detallePedidos = new ArrayList<>();
 
-    g
+    //g
 
     public void agregarDetalleProducto(DetallePedido detallePedido) {
         if (!detallePedidos.contains(detallePedido)) {
@@ -38,19 +41,16 @@ public class Producto extends Base{
         }
     }
 
-
-
-
     public int actualizarStock() {
         if (detallePedidos != null && !detallePedidos.isEmpty()) {
-            stock -= detallePedidos.last().getCantidad();
+            int cantidad = detallePedidos.get(detallePedidos.size() - 1).getCantidad();
+            if (stock >= cantidad) {
+                stock -= cantidad;
+            } else {
+                throw new IllegalStateException("Stock insuficiente");
+            }
         }
         return stock;
     }
-
-
-
-
-
 
 }
