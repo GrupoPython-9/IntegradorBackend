@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Usuario {
+public class Usuario extends Base{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,9 +23,6 @@ public class Usuario {
     private String mail;
     private String celular;
     private String contrasenia;
-
-    @Builder.Default
-    private boolean isEliminado = false;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
