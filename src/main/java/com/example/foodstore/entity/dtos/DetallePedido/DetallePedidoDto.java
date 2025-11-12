@@ -1,22 +1,16 @@
 package com.example.foodstore.entity.dtos.DetallePedido;
 
-import com.example.foodstore.entity.Producto;
+import com.example.foodstore.entity.dtos.Producto.ProductoDto;
 import lombok.*;
 
-
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 public class DetallePedidoDto {
-
-
-
     private Long id;
-
     private int cantidad;
     private double subtotal;
-    private String producto_nombre;
+    private ProductoDto producto;
 }

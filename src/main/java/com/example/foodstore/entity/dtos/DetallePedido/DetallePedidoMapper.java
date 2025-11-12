@@ -1,39 +1,25 @@
 package com.example.foodstore.entity.dtos.DetallePedido;
 
 import com.example.foodstore.entity.DetallePedido;
-import com.example.foodstore.entity.Producto;
-import com.example.foodstore.entity.dtos.Producto.ProductoCreate;
 import com.example.foodstore.entity.dtos.Producto.ProductoDto;
-import lombok.*;
-
-
+import com.example.foodstore.entity.dtos.Producto.ProductoMapper;
 
 public class DetallePedidoMapper {
 
-
-    public static DetallePedidoDto toDto (DetallePedido detallePedido){
-
-        DetallePedidoDto detallePedidoDto=new DetallePedidoDto.DetallePedidoDtoBuilder()
+    public static DetallePedidoDto toDto(DetallePedido detallePedido) {
+        return DetallePedidoDto.builder()
                 .id(detallePedido.getId())
                 .cantidad(detallePedido.getCantidad())
-                .subtotal(detallePedido.getSubtotal()) //ver si esta bien
-                .producto_nombre(detallePedido.getProducto().getNombre())
+                .subtotal(detallePedido.getSubtotal())
+                .producto(ProductoMapper.toDto(detallePedido.getProducto()))
                 .build();
-        return detallePedidoDto;
     }
 
-    public static DetallePedido toEntity(DetallePedidoCreate dc){
+    //Este metodo ya no se usa porque el Producto se busca en el Service usando productoId
+    public static DetallePedido toEntitySinProducto(DetallePedidoCreate dc) {
         DetallePedido detallePedido = new DetallePedido();
         detallePedido.setCantidad(dc.getCantidad());
-        detallePedido.setProducto(dc.getProducto());
-        detallePedido.setSubtotal(dc.obtenerSubtotal());///ver si esta bien
-
-
-
-
+        detallePedido.setSubtotal(dc.getSubtotal());
         return detallePedido;
     }
-
-
-
 }
