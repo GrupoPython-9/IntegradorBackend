@@ -7,6 +7,7 @@ import com.example.foodstore.entity.*;
 import com.example.foodstore.entity.dtos.DetallePedido.DetallePedidoMapper;
 import com.example.foodstore.entity.dtos.Pedido.PedidoCreate;
 import com.example.foodstore.entity.dtos.Pedido.PedidoDto;
+import com.example.foodstore.entity.dtos.Pedido.PedidoEdit;
 import com.example.foodstore.entity.dtos.Pedido.PedidoMapper;
 import com.example.foodstore.entity.dtos.DetallePedido.DetallePedidoCreate;
 
@@ -73,4 +74,26 @@ public class PedidoServiceImp implements PedidoService {
                 .map(PedidoMapper::toDto)
                 .orElse(null);
     }
+
+    @Override
+    public PedidoDto actualizar(Long id, PedidoEdit pedidoEdit) {
+
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        String nuevoEstado = pedidoEdit.getEstado();
+
+        // Validar estados permitidos
+        try {
+            Estado estadoEnum = Estado.valueOf(nuevoEstado.toUpperCase());
+            pedido.setEstado(estadoEnum);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Estado inválido: " + nuevoEstado);
+        }
+
+        pedido = pedidoRepository.save(pedido);
+
+        return PedidoMapper.toDto(pedido);
+    }
+
 }

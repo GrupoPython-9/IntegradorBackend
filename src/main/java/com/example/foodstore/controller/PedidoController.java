@@ -3,6 +3,7 @@ package com.example.foodstore.controller;
 import com.example.foodstore.Services.Pedido.PedidoService;
 import com.example.foodstore.entity.dtos.Pedido.PedidoCreate;
 import com.example.foodstore.entity.dtos.Pedido.PedidoDto;
+import com.example.foodstore.entity.dtos.Pedido.PedidoEdit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,4 +45,18 @@ public class PedidoController {
         if (pedido != null) return ResponseEntity.ok(pedido);
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizarPedido(
+            @PathVariable Long id,
+            @RequestBody PedidoEdit pedidoEdit
+    ) {
+        try {
+            PedidoDto actualizado = pedidoService.actualizar(id, pedidoEdit);
+            return ResponseEntity.ok(actualizado);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
 }
