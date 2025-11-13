@@ -96,4 +96,12 @@ public class PedidoServiceImp implements PedidoService {
         return PedidoMapper.toDto(pedido);
     }
 
+    @Override
+    public void eliminar(Long id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+        pedidoRepository.delete(pedido);
+    }
+
+
 }

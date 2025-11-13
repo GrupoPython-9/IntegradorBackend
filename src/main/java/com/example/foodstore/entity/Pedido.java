@@ -30,4 +30,10 @@ public class Pedido {
     @JoinColumn
     @Builder.Default
     private List<DetallePedido> detallePedidos = new ArrayList<>();
+
+    //InfoPedido
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "info_entrega_id")
+    private PedidoInfoEntrega infoEntrega;
+
 }

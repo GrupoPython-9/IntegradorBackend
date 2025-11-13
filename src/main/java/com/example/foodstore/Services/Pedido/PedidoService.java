@@ -11,5 +11,7 @@ public interface PedidoService {
     List<PedidoDto> buscaTodos();
     PedidoDto buscaId(Long id);
     PedidoDto actualizar(Long id, PedidoEdit pedidoEdit);
+    void eliminar(Long id);
+
 
 }

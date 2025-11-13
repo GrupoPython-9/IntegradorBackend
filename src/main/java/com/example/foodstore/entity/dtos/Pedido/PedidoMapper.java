@@ -2,6 +2,7 @@ package com.example.foodstore.entity.dtos.Pedido;
 
 import com.example.foodstore.entity.Estado;
 import com.example.foodstore.entity.Pedido;
+import com.example.foodstore.entity.PedidoInfoEntrega;
 import com.example.foodstore.entity.dtos.DetallePedido.DetallePedidoMapper;
 
 import java.time.LocalDate;
@@ -29,6 +30,19 @@ public class PedidoMapper {
 
         // Los DetallePedido se construyen en el servicio, porque necesitan buscar Producto por ID
         // Así que acá no se asignan aún
+        //Nuevo
+        if (pedidoCreate.getInfoEntrega() != null) {
+
+            PedidoInfoEntrega info = PedidoInfoEntrega.builder()
+                    .direccion(pedidoCreate.getInfoEntrega().getDireccion())
+                    .telefono(pedidoCreate.getInfoEntrega().getTelefono())
+                    .metodoPago(pedidoCreate.getInfoEntrega().getMetodoPago())
+                    .nota(pedidoCreate.getInfoEntrega().getNota())
+                    .build();
+
+            pedido.setInfoEntrega(info);
+        }
+        //_>
         return pedido;
     }
 }

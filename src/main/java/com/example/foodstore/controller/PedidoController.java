@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -58,5 +60,26 @@ public class PedidoController {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarPedido(@PathVariable Long id) {
+        try {
+            pedidoService.eliminar(id);
+
+            Map<String, Object> respuesta = new HashMap<>();
+            respuesta.put("estado", 200);
+            respuesta.put("mensaje", "Pedido eliminado");
+
+            return ResponseEntity.ok(respuesta);
+
+        } catch (Exception e) {
+
+            Map<String, Object> error = new HashMap<>();
+            error.put("estado", 400);
+            error.put("mensaje", e.getMessage());
+
+            return ResponseEntity.badRequest().body(error);
+        }
+    }
+
 
 }
