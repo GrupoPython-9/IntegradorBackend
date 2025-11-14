@@ -1,5 +1,6 @@
 package com.example.foodstore.entity.dtos.DetallePedido;
 
+import com.example.foodstore.entity.Producto;
 import lombok.*;
 
 @Getter
@@ -11,5 +12,6 @@ import lombok.*;
 public class DetallePedidoCreate {
     private int cantidad;
     private double subtotal;
-    private Long productoId;
+    private Long ProductoId;
+     private Producto producto;
 }

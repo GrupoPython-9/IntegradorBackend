@@ -104,4 +104,71 @@ public class PedidoServiceImp implements PedidoService {
     }
 
 
-}
+    //                  CONFIRMAR PEDIDO → RESTAR STOCK
+    // ------------------------------------------------------------------
+    @Override
+    public PedidoDto confirmarPedidoDesc(Long id) {
+
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No existe pedido"));
+
+        // Impedir doble resta
+        if (pedido.getEstado() == Estado.CONFIRMADO) {
+            throw new IllegalStateException("El pedido ya está confirmado");
+        }
+
+        // RESTAR STOCK usando los detalles del pedido en BD
+        for (DetallePedido det : pedido.getDetallePedidos()) {
+
+            Producto producto = det.getProducto();
+            int cantidad = det.getCantidad();
+
+            if (producto.getStock() < cantidad) {
+                throw new IllegalStateException(
+                        "Stock insuficiente para el producto: " + producto.getNombre()
+                );
+            }
+
+            producto.setStock(producto.getStock() - cantidad);
+            productoRepository.save(producto);
+        }
+
+        pedido.setEstado(Estado.CONFIRMADO);
+        pedidoRepository.save(pedido);
+
+        return PedidoMapper.toDto(pedido);
+    }
+
+    // ------------------------------------------------------------------
+    //                  CANCELAR PEDIDO → DEVOLVER STOCK
+    // ------------------------------------------------------------------
+    @Override
+    public PedidoDto cancelarPedido(Long id) {
+
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No existe pedido"));
+
+        if (pedido.getEstado() == Estado.CANCELADO) {
+            throw new IllegalStateException("El pedido ya está cancelado");
+        }
+
+        // SOLO devolver stock si antes ya había sido descontado
+        if (pedido.getEstado() == Estado.CONFIRMADO) {
+
+            for (DetallePedido det : pedido.getDetallePedidos()) {
+
+                Producto producto = det.getProducto();
+                int cantidad = det.getCantidad();
+
+                producto.setStock(producto.getStock() + cantidad);
+                productoRepository.save(producto);
+            }
+        }
+
+        pedido.setEstado(Estado.CANCELADO);
+        pedidoRepository.save(pedido);
+
+        return PedidoMapper.toDto(pedido);
+    }
+
+   }

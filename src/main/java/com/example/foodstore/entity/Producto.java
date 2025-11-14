@@ -31,6 +31,7 @@ public class Producto extends Base{
     //@JoinColumn(name = "producto_id")
     //Lo dejo comentado para marcar la diferencia ↑ ↓
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)//Corregí el @JoinColumn ya que va del lado @ManyToOne en DetallePedido
+    @Builder.Default
     private List<DetallePedido> detallePedidos = new ArrayList<>();
 
     //g
@@ -41,16 +42,46 @@ public class Producto extends Base{
         }
     }
 
-    public int actualizarStock() {
+
+}
+
+
+    /* public int actualizarStock() {
         if (detallePedidos != null && !detallePedidos.isEmpty()) {
             int cantidad = detallePedidos.get(detallePedidos.size() - 1).getCantidad();
+            if (detallePedidos.get(detallePedidos.size()-1).getPedido().getEstado()!=Estado.CANCELADO){
+
             if (stock >= cantidad) {
                 stock -= cantidad;
             } else {
                 throw new IllegalStateException("Stock insuficiente");
-            }
+            }}else{stock+=cantidad;}
+
         }
         return stock;
     }
+   /*public int canceladoPedido(){
+        List<DetallePedido>cancelados = new ArrayList<>();
+        for (DetallePedido detallePedido:detallePedidos){
+            if (detallePedido.getPedido().getEstado() == Estado.CANCELADO) { cancelados.add(detallePedido);
 
-}
+            }
+
+
+        }
+        int cantidad = cancelados.get(cancelados.size()-1).getCantidad();
+        stock += cantidad
+
+        return stock;
+
+
+
+
+
+       }
+   }*/
+
+
+
+
+

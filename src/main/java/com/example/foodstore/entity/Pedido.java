@@ -36,4 +36,22 @@ public class Pedido {
     @JoinColumn(name = "info_entrega_id")
     private PedidoInfoEntrega infoEntrega;
 
+   /* public void agregarDetallePedido(int cantidad,Producto producto){
+        detallePedidos.add(DetallePedido.builder()
+                        .cantidad(cantidad)
+                        .producto(producto)
+
+                .build());
+    }*/
+
+    public double calcularTotal(){
+
+        for (DetallePedido detallePedido:detallePedidos){
+            this.total = this.total + detallePedido.getSubtotal();
+
+        }return total;
+
+    }
+
+
 }

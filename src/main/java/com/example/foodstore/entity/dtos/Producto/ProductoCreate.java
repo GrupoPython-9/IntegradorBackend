@@ -20,7 +20,7 @@ public class ProductoCreate {
     private int stock;
     private String imagen;
 
-    @Builder.Default
+    /*@Builder.Default
     private TreeSet<DetallePedido> detallePedidos= new TreeSet<>(Comparator.comparingLong(DetallePedido::getId));
 
     public int actualizarStock() {
@@ -28,7 +28,7 @@ public class ProductoCreate {
             stock -= detallePedidos.last().getCantidad();
         }
         return stock;
-    }
+    }*/
 
 
 

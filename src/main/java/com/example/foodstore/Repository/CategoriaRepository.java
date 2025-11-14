@@ -10,9 +10,9 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     //Para ver los eliminados
     List<Categoria> findAllByEliminadoTrue();
 
-    Optional<Categoria> findById(Long id);
+   // Optional<Categoria> findById(Long id);
 
-    Categoria save (Categoria categoria);
+   // Categoria save (Categoria categoria);
 
     Optional<Categoria> findByIdAndEliminadoFalse(Long id);
 
@@ -20,6 +20,6 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
     Optional<Categoria> findByIdAndEliminadoTrue(Long id);
 
-    void delete(Categoria categoria);
+    //void delete(Categoria categoria);
 
 }

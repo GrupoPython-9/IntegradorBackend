@@ -81,5 +81,21 @@ public class PedidoController {
         }
     }
 
+    // CONFIRMAR PEDIDO → RESTAR STOCK
+    // -------------------------------------------------------
+    @PutMapping("/{id}/confirmar")
+    public ResponseEntity<PedidoDto> confirmarPedido(@PathVariable Long id) {
+        PedidoDto dto = pedidoService.confirmarPedidoDesc(id);
+        return ResponseEntity.ok(dto);
+    }
+
+    // -------------------------------------------------------
+    // CANCELAR PEDIDO → DEVOLVER STOCK SI CORRESPONDE
+    // -------------------------------------------------------
+    @PutMapping("/{id}/cancelar")
+    public ResponseEntity<PedidoDto> cancelarPedido(@PathVariable Long id) {
+        PedidoDto dto = pedidoService.cancelarPedido(id);
+        return ResponseEntity.ok(dto);
+    }
 
 }
