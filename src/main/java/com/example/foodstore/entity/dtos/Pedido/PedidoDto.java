@@ -1,5 +1,6 @@
 package com.example.foodstore.entity.dtos.Pedido;
 
+import com.example.foodstore.entity.PedidoInfoEntrega;
 import com.example.foodstore.entity.dtos.DetallePedido.DetallePedidoDto;
 import lombok.*;
 
@@ -17,4 +18,5 @@ public class PedidoDto {
     private String estado;
     private double total;
     private List<DetallePedidoDto> detallePedidos;
+    private PedidoInfoEntrega infoEntrega;
 }

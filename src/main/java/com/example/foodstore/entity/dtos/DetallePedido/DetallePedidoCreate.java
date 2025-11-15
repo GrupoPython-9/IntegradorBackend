@@ -10,6 +10,6 @@ import lombok.*;
 @ToString
 public class DetallePedidoCreate {
     private int cantidad;
-    private double subtotal;
+    //private double subtotal;
     private Long productoId;
 }

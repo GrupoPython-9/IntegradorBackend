@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 public class PedidoCreate {
     private List<DetallePedidoCreate> detallePedidos;
-    private double total;
+    //private double total;
     private String estado; // "PENDIENTE"
 
     private PedidoInfoEntregaCreate infoEntrega; // <--- NUEVO

@@ -14,6 +14,7 @@ public class PedidoMapper {
                 .fecha(pedido.getFecha())
                 .estado(pedido.getEstado().name())
                 .total(pedido.getTotal())
+                .infoEntrega(pedido.getInfoEntrega())
                 .detallePedidos(
                         pedido.getDetallePedidos().stream()
                                 .map(DetallePedidoMapper::toDto)
@@ -25,7 +26,7 @@ public class PedidoMapper {
     public static Pedido toEntity(PedidoCreate pedidoCreate) {
         Pedido pedido = new Pedido();
         pedido.setEstado(Estado.valueOf(pedidoCreate.getEstado()));
-        pedido.setTotal(pedidoCreate.getTotal());
+        //pedido.setTotal(pedidoCreate.getTotal());
         pedido.setFecha(LocalDate.now()); // o pedidoCreate.getFecha() si lo incluís en el DTO
 
         // Los DetallePedido se construyen en el servicio, porque necesitan buscar Producto por ID

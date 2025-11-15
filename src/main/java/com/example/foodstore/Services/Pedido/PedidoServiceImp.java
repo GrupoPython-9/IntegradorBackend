@@ -49,6 +49,7 @@ public class PedidoServiceImp implements PedidoService {
             DetallePedido detalle = DetallePedidoMapper.toEntitySinProducto(d);
             detalle.setProducto(producto);
 
+            detalle.obtenerSubtotal();
             detalle = detallePedidoRepository.save(detalle);
             detalles.add(detalle);
             total += detalle.getSubtotal();

@@ -19,7 +19,7 @@ public class DetallePedidoMapper {
     public static DetallePedido toEntitySinProducto(DetallePedidoCreate dc) {
         DetallePedido detallePedido = new DetallePedido();
         detallePedido.setCantidad(dc.getCantidad());
-        detallePedido.setSubtotal(dc.getSubtotal());
+
         return detallePedido;
     }
 }
