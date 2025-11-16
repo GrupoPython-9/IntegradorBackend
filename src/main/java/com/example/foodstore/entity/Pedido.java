@@ -15,43 +15,48 @@ import java.util.List;
 @AllArgsConstructor
 @SuperBuilder
 public class Pedido {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //Consultar
+
     @Builder.Default
     private LocalDate fecha = LocalDate.now();
 
     @Enumerated(EnumType.STRING)
     private Estado estado;
+
     private double total;
 
-    @OneToMany
-    @JoinColumn
+    // -------------------------------
+    //   RELACIÓN UNIDIRECCIONAL 1:N
+    // -------------------------------
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "pedido_id")  // FK en tabla DETALLEPEDIDO
     @Builder.Default
     private List<DetallePedido> detallePedidos = new ArrayList<>();
 
-    //InfoPedido
+
+    // -------------------------------
+    //       INFO DE ENTREGA
+    // -------------------------------
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "info_entrega_id")
     private PedidoInfoEntrega infoEntrega;
 
-   /* public void agregarDetallePedido(int cantidad,Producto producto){
-        detallePedidos.add(DetallePedido.builder()
-                        .cantidad(cantidad)
-                        .producto(producto)
 
-                .build());
-    }*/
-
-    public double calcularTotal(){
-
-        for (DetallePedido detallePedido:detallePedidos){
-            this.total = this.total + detallePedido.getSubtotal();
-
-        }return total;
-
+    // -------------------------------
+    //     CÁLCULO DEL TOTAL
+    // -------------------------------
+    public double calcularTotal() {
+        this.total = 0;
+        for (DetallePedido detalle : detallePedidos) {
+            this.total += detalle.getSubtotal();
+        }
+        return this.total;
     }
-
 
 }
