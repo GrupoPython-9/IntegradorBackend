@@ -13,6 +13,7 @@ import com.example.foodstore.entity.dtos.DetallePedido.DetallePedidoCreate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -123,6 +124,7 @@ public class PedidoServiceImp implements PedidoService {
     //                  CONFIRMAR PEDIDO → RESTAR STOCK
     // ------------------------------------------------------------------
     @Override
+    @Transactional
     public PedidoDto confirmarPedidoDesc(Long id) {
 
         Pedido pedido = pedidoRepository.findById(id)
@@ -159,6 +161,7 @@ public class PedidoServiceImp implements PedidoService {
     //                  CANCELAR PEDIDO → DEVOLVER STOCK
     // ------------------------------------------------------------------
     @Override
+    @Transactional
     public PedidoDto cancelarPedido(Long id) {
 
         Pedido pedido = pedidoRepository.findById(id)
